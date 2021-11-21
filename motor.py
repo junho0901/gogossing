@@ -1,0 +1,109 @@
+# -*- coding: utf-8 -*-
+
+import RPi_I2C_driver
+import requests
+from bs4 import BeautifulSoup
+import spidev
+import time
+
+
+#Define Variables
+pad_channel0 = 0
+pad_channel1 = 2
+pad_channel2 = 4
+pad_channel3 = 6
+
+LCD_ADDR = 0x27
+ 
+
+#Create SPI
+spi = spidev.SpiDev()
+spi.open(0, 0)
+spi.max_speed_hz=1000000
+
+def get_strength(adcnum):
+# read SPI data from the MCP3008, 8 channels in total
+
+    if adcnum > 7 or adcnum < 0:
+        return -1
+
+    r = spi.xfer2([1, 8 + adcnum << 4, 0])
+    data = ((r[1] & 3) << 8) + r[2]
+
+    return data
+    
+def main(args):
+
+
+    lcd = RPi_I2C_driver.lcd(LCD_ADDR)
+
+    try:
+        while True:
+            url = 'http://192.168.0.235/'
+
+            response = requests.get(url)
+
+            if response.status_code == 200:
+                html = response.text
+                soup = BeautifulSoup(html, 'html.parser')
+                title = soup.select_one('body')
+                print(title.get_text())
+                a = title.get_text()
+                lcd.clear()
+                
+                #pressure data#
+                pad_value0 = get_strength(pad_channel0)
+                pad_value1 = get_strength(pad_channel1)
+                pad_value2 = get_strength(pad_channel2)
+                pad_value3 = get_strength(pad_channel3)
+
+                print("---------------------------------------")
+                print("Pressure Pad Value0: %d \n" % pad_value0)
+                print("Pressure Pad Value1: %d \n" % pad_value1)
+                print("Pressure Pad Value2: %d \n" % pad_value2)
+                print("Pressure Pad Value3: %d \n" % pad_value3)
+            
+            count = 0
+            if(pad_value0 > 0):
+                count += 1
+                
+            elif(pad_value1 > 0):
+                count += 1
+                
+            elif(pad_value2 > 0):
+                count += 1
+                
+            elif(pad_value3 > 0):
+                count += 1   
+                 
+            print("count : ", count)
+                
+            time.sleep(0.5)                
+            
+            if a[0] == '1':
+                lcd.print('x')
+            
+            elif a[0] == '1' and count > 2:
+                lcd.print("Two people")
+                    
+            elif a[0] == '0' and count < 3:
+                lcd.print("Helmet off")
+            
+            elif a[0] == '0' and count > 2:
+                lcd.print("Helmet off")
+                lcd.print("Two People")
+            
+            else : 
+                print(response.status_code)
+                time.sleep(0.5)
+
+                            
+    except KeyboardInterrupt:
+        print(" KeyboardInterrupt")
+        pass
+
+    return 0
+
+if __name__ == '__main__':
+    import sys
+    sys.exit(main(sys.argv))
