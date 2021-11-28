@@ -3,9 +3,15 @@ Information about the Sensors on mainboard
 ********************************************
 
 Sensors
- 1) HC-SR4 (초음파센서)
- 2) MPU9250 (자이로센서)
- 3) FSR406 (압력센서)
- 4) PASSIVE BUZZER (패시브 부저)
- 5) lcd (디스플레이)
- 6) L-298N
+ - HC-SR4 (초음파센서): DistanceChecker.py
+ - MPU9250 (자이로센서): AngleChecker.py
+ - FSR406 (압력센서): MultiPeopleChecker.py
+ - PASSIVE BUZZER (패시브 부저): AlarmController.py
+ - LCD (디스플레이): DisplayController.py
+ - L-298N (모터드라이버): MotorController.py
+
+Data communication
+ - Read Data from APACHE: Data.py
+
+Data tranfer
+ - Send Email: MailController.py
