@@ -9,6 +9,7 @@ Sensors
  - BUZZER (Passive Buzzer): AlarmController.py
  - LCD (Display): DisplayController.py
  - L-298N (Motor-Driver): MotorController.py
+ - Neo-6M (GPS): LocationChecker.py
 
 Data communication
  - Read Data from APACHE: Data.py
