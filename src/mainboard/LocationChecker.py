@@ -1,3 +1,14 @@
+#IP GPS
+import json
+import requests
+
+def Get_GPS():
+    url = 'http://ip-api.com/json'
+    data = requests.get(url)
+    res = data.json()
+    print(res)
+
+''' GPS Neo-6m Module 사용
 import serial 
 import pynmea2
 
@@ -9,5 +20,6 @@ def parseGPS(str):
         while True: 
             str = serialPort.readline() 
             parseGPS(str)
+'''
 
             
