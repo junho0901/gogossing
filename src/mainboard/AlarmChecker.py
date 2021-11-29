@@ -24,4 +24,3 @@ def getsound():
     except KeyboardInterrupt:
         GPIO.cleanup()
     return 0
-
