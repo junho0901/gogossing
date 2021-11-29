@@ -14,7 +14,7 @@ Please see the files in following directories:
   - gogossing/src/helmetboard
 
 
-Junho Lee, Museong Seo, Seongseop Lim, and Eunji Joe 
+Junho Lee, Museong Seo, Seongseop Lim, and Eunji Jo 
 
 Department of Aerospace and Software Engineering, Gyeongsang National University.
 
