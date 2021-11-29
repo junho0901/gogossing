@@ -15,7 +15,7 @@ def get_angle():
     imu.readSensor()
     imu.computeOrientation()
 
-    RollValue = abs(imu.roll)
+    roll_value = abs(imu.roll)
     
     return roll_value
 
