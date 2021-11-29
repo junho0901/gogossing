@@ -11,4 +11,5 @@ The main functions are below.
 3) If the Kickboard falls down while driving, an alarm sound is activated or a gps value is transmitted to an acquaintance of the driver to get help.
 
 Please see the code in "gogossing/src/mainboard", "gogossing/src/helmetboard"
+
 If you have any question. Please contact Email: dlwnsgh0901@gnu.ac.kr
