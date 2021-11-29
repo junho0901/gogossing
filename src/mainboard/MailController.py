@@ -13,3 +13,4 @@ def send_mail():    # sendmail() --> send_mail()
     msg['To'] = 'lss980301@naver.com'
     smtp.sendmail('seongsabgim@gmail.com', 'lss980301@naver.com', msg.as_string())
     smtp.quit()
+ 
