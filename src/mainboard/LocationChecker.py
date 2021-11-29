@@ -9,3 +9,5 @@ def parseGPS(str):
         while True: 
             str = serialPort.readline() 
             parseGPS(str)
+
+            
