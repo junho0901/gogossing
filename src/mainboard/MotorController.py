@@ -1,109 +1,114 @@
 # -*- coding: utf-8 -*-
+# 라즈베리파이 GPIO 패키지 
 
-import RPi_I2C_driver
-import requests
-from bs4 import BeautifulSoup
-import spidev
-import time
+import RPi.GPIO as GPIO
+from time import sleep
+GPIO.setwarnings(False)
 
+# 모터 상태
+STOP  = 0
+FORWARD  = 1
+BACKWORD = 2
 
-#Define Variables
-pad_channel0 = 0
-pad_channel1 = 2
-pad_channel2 = 4
-pad_channel3 = 6
+# 모터 채널
+CH1 = 0
+CH2 = 1
 
-LCD_ADDR = 0x27
- 
+# PIN 입출력 설정
+OUTPUT = 1
+INPUT = 0
 
-#Create SPI
-spi = spidev.SpiDev()
-spi.open(0, 0)
-spi.max_speed_hz=1000000
+# PIN 설정
+HIGH = 1
+LOW = 0
 
-def get_strength(adcnum):
-# read SPI data from the MCP3008, 8 channels in total
+# 실제 핀 정의
+#PWM PIN
+ENA = 23  #37 pin
+ENB = 13  #27 pin
 
-    if adcnum > 7 or adcnum < 0:
-        return -1
+#GPIO PIN
+IN1 = 25  #37 pin
+IN2 = 24  #35 pin
+IN3 = 19 #31 pin
+IN4 = 26  #29 pin
 
-    r = spi.xfer2([1, 8 + adcnum << 4, 0])
-    data = ((r[1] & 3) << 8) + r[2]
+# GPIO 모드 설정 
+GPIO.setmode(GPIO.BCM)
 
-    return data
+# 핀 설정 함수
+def setPinConfig(EN, INA, INB):  
+    GPIO.setwarnings(False)      
+    GPIO.setup(EN, GPIO.OUT)
+    GPIO.setup(INA, GPIO.OUT)
+    GPIO.setup(INB, GPIO.OUT)
+    # 100khz 로 PWM 동작 시킴
+    pwm = GPIO.PWM(EN, 100)
+     
+    # 우선 PWM 멈춤.   
+    pwm.start(0) 
+    return pwm
+
+# 모터 제어 함수
+def setMotorContorl(pwm, INA, INB, speed, stat):
+
+    #모터 속도 제어 PWM
+    pwm.ChangeDutyCycle(speed)
     
-def main(args):
+    #앞으로
+    if stat == FORWARD:
+        GPIO.output(INA, HIGH)
+        GPIO.output(INB, LOW)
+        
+    #뒤로
+    elif stat == BACKWORD:
+        GPIO.output(INA, LOW)
+        GPIO.output(INB, HIGH)
+    #정지
+    elif stat == STOP:
+        GPIO.output(INA, LOW)
+        GPIO.output(INB, LOW)
 
+        
+# 모터 제어함수 간단하게 사용하기 위해 한번더 래핑(감쌈)
+def set_rpm1(ch, speed, stat):
+    if ch == CH1:
+        #pwmA는 핀 설정 후 pwm 핸들을 리턴 받은 값이다.
+        setMotorContorl(pwmA, IN1, IN2, speed, stat)
+        
+def set_rpm2(ch, speed, stat):
+    if ch == CH2:
+        #pwmB는 핀 설정 후 pwm 핸들을 리턴 받은 값이다.
+        setMotorContorl(pwmB, IN3, IN4, speed, stat)
 
-    lcd = RPi_I2C_driver.lcd(LCD_ADDR)
-
-    try:
-        while True:
-            url = 'http://192.168.0.235/'
-
-            response = requests.get(url)
-
-            if response.status_code == 200:
-                html = response.text
-                soup = BeautifulSoup(html, 'html.parser')
-                title = soup.select_one('body')
-                print(title.get_text())
-                a = title.get_text()
-                lcd.clear()
-                
-                #pressure data#
-                pad_value0 = get_strength(pad_channel0)
-                pad_value1 = get_strength(pad_channel1)
-                pad_value2 = get_strength(pad_channel2)
-                pad_value3 = get_strength(pad_channel3)
-
-                print("---------------------------------------")
-                print("Pressure Pad Value0: %d \n" % pad_value0)
-                print("Pressure Pad Value1: %d \n" % pad_value1)
-                print("Pressure Pad Value2: %d \n" % pad_value2)
-                print("Pressure Pad Value3: %d \n" % pad_value3)
+def lose_rpm1(ch, speed, stat):  # 5초 이내에 감속하여 정지
+    if ch == CH1:
+        for i in range(50):
+            speed = speed - 2
+            setMotorContorl(pwmB, IN3, IN4, speed, stat)
+            sleep(0.1)
             
-            count = 0
-            if(pad_value0 > 0):
-                count += 1
-                
-            elif(pad_value1 > 0):
-                count += 1
-                
-            elif(pad_value2 > 0):
-                count += 1
-                
-            elif(pad_value3 > 0):
-                count += 1   
-                 
-            print("count : ", count)
-                
-            time.sleep(0.5)                
-            
-            if a[0] == '1':
-                lcd.print('x')
-            
-            elif a[0] == '1' and count > 2:
-                lcd.print("Two people")
-                    
-            elif a[0] == '0' and count < 3:
-                lcd.print("Helmet off")
-            
-            elif a[0] == '0' and count > 2:
-                lcd.print("Helmet off")
-                lcd.print("Two People")
-            
-            else : 
-                print(response.status_code)
-                time.sleep(0.5)
+            if speed == 0:
+                GPIO.output(INA, LOW)
+                GPIO.output(INB, LOW)
 
-                            
-    except KeyboardInterrupt:
-        print(" KeyboardInterrupt")
-        pass
+def lose_rpm2(ch, speed, stat):   # 5초 이내에 감속하여 정지
+    if ch == CH2:
+        for i in range(50):
+            speed = speed - 2
+            setMotorContorl(pwmB, IN3, IN4, speed, stat)
+            sleep(0.1)
+            
+            if speed == 0:
+                GPIO.output(INA, LOW)
+                GPIO.output(INB, LOW)
+             
+#모터 핀 설정
+#핀 설정후 PWM 핸들 얻어옴
+def motor_pinset():   
+    pwmA = setPinConfig(ENA, IN1, IN2)
+    pwmB = setPinConfig(ENB, IN3, IN4)
 
-    return 0
 
-if __name__ == '__main__':
-    import sys
-    sys.exit(main(sys.argv))
+# 종료
+GPIO.cleanup()
