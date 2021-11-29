@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
-import time
-import smtplib
+# devide "import time,smtplib" into two sentences shown line3, and line4
+import time       
+import smtplib 
 from email.mime.text import MIMEText
 
 def send_mail():    # sendmail() --> send_mail()
