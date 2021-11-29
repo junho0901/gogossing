@@ -23,20 +23,32 @@ def get_strength(adcnum):
 
     return data
 
-def get_pressure():
+def count_pressure():
+    count = 0
     pad_value0 = get_strength(pad_channel0)
     pad_value1 = get_strength(pad_channel1)
     pad_value2 = get_strength(pad_channel2)     
     pad_value3 = get_strength(pad_channel3)
 
+    if pad_value0 > 0:
+        count = count + 1
+    if pad_value1 > 0:
+        count = count + 1
+    if pad_value2 > 0:
+        count = count + 1
+    if pad_value3 > 0:
+        count = count + 1
+    
+    time.sleep(0.5)
+    
+    return count
+'''
     print("---------------------------------------")
     print("Pressure Pad Value0: %d \n" % pad_value0)
     print("Pressure Pad Value1: %d \n" % pad_value1) 
     print("Pressure Pad Value2: %d \n" % pad_value2)
     print("Pressure Pad Value3: %d \n" % pad_value3)
+'''
 
-    time.sleep(0.5)
-
-    
 # except KeyboardInterrupt:
 #    pass
