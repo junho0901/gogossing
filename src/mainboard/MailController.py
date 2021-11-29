@@ -3,7 +3,7 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 
-def sendmail():
+def send_mail():    # sendmail() --> send_mail()
     smtp = smtplib.SMTP('smtp.gmail.com',587)
     smtp.starttls()
     smtp.login('seongsabgim@gmail.com', 'ggmzyrdpzjlkqpow')
