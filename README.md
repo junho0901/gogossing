@@ -16,10 +16,11 @@ Please see the files in following directories:
 
 Junho Lee, Museong Seo, Seongseop Lim, and Eunji Jo 
 
-Department of Aerospace and Software Engineering, Gyeongsang National University.
-
+Department of Aerospace and Software Engineering, Gyeongsang National University
+(Prof. Seon-Ah Lee, Department of Aerospace and Software Engineering, Gyeongsang National University)
 
 If you have any question. Please contact below. 
 - Junho Lee: dlwnsgh0901@gnu.ac.kr
 - Museong Seo: 2017011842@gnu.ac.kr
 - Eunji Jo: joeunji1683@gmail.com
+- Seongseop lim: lss980301@naver.com
