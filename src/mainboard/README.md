@@ -1,5 +1,5 @@
 ********************************************
-Information about the Sensors on mainboard
+Information about mainboard
 ********************************************
 
 Sensors
