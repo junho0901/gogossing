@@ -8,7 +8,7 @@ In order to achieve our goal, we offer four main functions.
 
 1) If the driver doesn't wear a helmet, Kickboard doesn't not work. In addition, when a driver takes off his helmet while driving, the speed gradually decreases and eventually stops.
 2) When the Kickboard detects an an object close to the front while driving, it slows down a little.
-3) 
+3) If the Kickboard falls down while driving, an alarm sound is activated or a gps value is transmitted to an acquaintance of the driver to 
 
 
 Please See below.
