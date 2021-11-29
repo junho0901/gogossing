@@ -3,7 +3,7 @@ Information about mainboard
 ********************************************
 
 Sensors
- - HC-SR4 (Ultra-Sonic): DistanceChecker.py
+ - HC-SR04 (Ultra-Sonic): DistanceChecker.py
  - MPU9250 (Gyro): AngleChecker.py
  - FSR406 (Pressure): MultiPeopleChecker.py
  - BUZZER (Passive Buzzer): AlarmController.py
