@@ -10,5 +10,4 @@ The main functions are below.
 2) If the Kickboard detects an an object close to the front while driving, it slows down a little.
 3) If the Kickboard falls down while driving, an alarm sound is activated or a gps value is transmitted to an acquaintance of the driver to get help.
 
-
-If you have any questions. Please contact Email: dlwnsgh0901@gnu.ac.kr
+If you have any question. Please contact Email: dlwnsgh0901@gnu.ac.kr
