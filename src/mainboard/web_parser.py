@@ -15,3 +15,5 @@ if response.status_code == 200:
         print("성공")
 else : 
     print(response.status_code)
+
+   
