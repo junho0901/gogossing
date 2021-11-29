@@ -1,5 +1,5 @@
-# devide "import time,smtplib" into two sentences shown line4, and line5
-import json
+# devide "import json, requests" into two sentences shown line2, and line3
+import json   
 import requests
 import smtplib
 from email.mime.text import MIMEText
