@@ -2,7 +2,7 @@
 This is a git Repository for gogossing with safety.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-The main goal of this project is to ensure the safety of a person who drives shared Kickboard. 
+The main purpose of this project is to ensure the safety of a person who drives a shared Kickboard. 
 
 The main functions are below.
 
