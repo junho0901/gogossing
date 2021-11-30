@@ -14,11 +14,9 @@ Please see the files in following directories:
   - gogossing/src/helmetboard
 
 
-Junho Lee, Museong Seo, Seongseop Lim, and Eunji Jo 
+Junho Lee, Museong Seo, Seongseop Lim, Eunji Jo, and Seon-Ah Lee 
 
 Department of Aerospace and Software Engineering, Gyeongsang National University
-
-(Prof. Seon-Ah Lee, Department of Aerospace and Software Engineering, Gyeongsang National University)
 
 If you have any question. Please contact below. 
 - Junho Lee: dlwnsgh0901@gnu.ac.kr
