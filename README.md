@@ -24,4 +24,4 @@ If you have any question. Please contact below.
 - Junho Lee: dlwnsgh0901@gnu.ac.kr
 - Museong Seo: 2017011842@gnu.ac.kr
 - Eunji Jo: joeunji1683@gmail.com
-- Seongseop lim: lss980301@naver.com
+- Seongseop Lim: lss980301@naver.com
