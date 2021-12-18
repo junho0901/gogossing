@@ -2,7 +2,7 @@
 import json
 import requests
 
-def Get_GPS():
+def get_GPS():
     url = 'http://ip-api.com/json'
     data = requests.get(url)
     res = data.json()
