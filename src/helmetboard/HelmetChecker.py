@@ -28,7 +28,7 @@ if __name__ == '__main__':
             t2.start()
             t2.join()
             press = que.get()
-            if dist < 10 and press > 1:
+            if dist < 20 and press > 1:
                 count = 0
                 SW.server_write(1)
             else:
