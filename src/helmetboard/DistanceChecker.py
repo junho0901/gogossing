@@ -42,7 +42,7 @@ def get_distance():
     while GPIO.input(E_PIN) == GPIO.HIGH:
         pulse_end = time.time()
     duration = float(pulse_end - pulse_begin)
-    distance = dist(duration)
+    distance = dist(duration) * 100
     return distance
 
 '''
