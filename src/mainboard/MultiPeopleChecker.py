@@ -39,8 +39,6 @@ def count_pressure():
     if pad_value3 > 0:
         count = count + 1
     
-    time.sleep(0.5)
-    
     return count
 '''
     print("---------------------------------------")
@@ -48,7 +46,11 @@ def count_pressure():
     print("Pressure Pad Value1: %d \n" % pad_value1) 
     print("Pressure Pad Value2: %d \n" % pad_value2)
     print("Pressure Pad Value3: %d \n" % pad_value3)
+    return count
+while(1):
+    count_pressure()
 '''
-
+'''
 # except KeyboardInterrupt:
 #    pass
+'''
