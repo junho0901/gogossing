@@ -16,7 +16,7 @@ def get_angle():
     imu.computeOrientation()
 
     roll_value = abs(imu.roll)
-    
-    return roll_value
 
-    
+    return roll_value 
+
+print(get_angle())
